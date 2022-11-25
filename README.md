@@ -14,10 +14,13 @@
 [Understand how docker works .](https://youtu.be/Tyy1BUEmhwg)
 
 # Difference between virtual machines and docker containers 
+[Difference between virtual machines and docker container](https://cloudacademy.com/blog/docker-vs-virtual-machines-differences-you-should-know/)
 
-![example of rotations](./containers-vs-virtual-machines.jpg)
+![Difference between virtual machines and docker container](./containers-vs-virtual-machines.jpg)
 
 
 # Some useful resources :
 
-[What are SSL/TLS Certificates? Why do we Need them? and How do they Work?](https://youtu.be/r1nJT63BFQ0)
++ [What are SSL/TLS Certificates? Why do we Need them? and How do they Work?](https://youtu.be/r1nJT63BFQ0)
++ [Understand what is docker ](https://youtu.be/pTFZFxd4hOI)
++ [Understand what is docker compose](https://youtu.be/HG6yIjZapSA)
