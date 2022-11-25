@@ -14,6 +14,7 @@
 [Understand how docker works .](https://youtu.be/Tyy1BUEmhwg)
 
 # Difference between virtual machines and docker containers 
+
 [Difference between virtual machines and docker container](https://cloudacademy.com/blog/docker-vs-virtual-machines-differences-you-should-know/)
 
 ![Difference between virtual machines and docker container](./containers-vs-virtual-machines.jpg)
@@ -24,3 +25,5 @@
 + [What are SSL/TLS Certificates? Why do we Need them? and How do they Work?](https://youtu.be/r1nJT63BFQ0)
 + [Understand what is docker ](https://youtu.be/pTFZFxd4hOI)
 + [Understand what is docker compose](https://youtu.be/HG6yIjZapSA)
++ [Understand what is nginx and why nginx](https://youtu.be/7VAI73roXaY)
++ [set up nginx with ssl](https://youtu.be/X3Pr5VATOyA)
