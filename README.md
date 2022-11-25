@@ -27,3 +27,4 @@
 + [Understand what is docker compose](https://youtu.be/HG6yIjZapSA)
 + [Understand what is nginx and why nginx](https://youtu.be/7VAI73roXaY)
 + [set up nginx with ssl](https://youtu.be/X3Pr5VATOyA)
++ [How does HTTPS work? What's a CA? What's a self-signed Certificate?](https://youtu.be/T4Df5_cojAs)
