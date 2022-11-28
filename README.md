@@ -19,6 +19,13 @@
 
 ![Difference between virtual machines and docker container](./containers-vs-virtual-machines.jpg)
 
+# Let's set up nginx 
+
+**This command is for generate ssl certificate**
+```
+openssl req -x509 -sha256 -days 356 -nodes -newkey rsa:2048 -keyout <where to put the key> -out <where to put sertificate> -subj "/C=MA/ST=khouribga/L=khouribga/O=1337/OU=1337/CN=nginx"
+```
+
 
 # Some useful resources :
 
