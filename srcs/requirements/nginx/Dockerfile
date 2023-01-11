@@ -8,12 +8,13 @@ RUN openssl req -x509 \
             -sha256 -days 356 \
             -nodes \
             -newkey rsa:2048 \
-            -subj "/CN=demo.mlopshub.com/C=US/L=San Fransisco" \
-            -keyout /etc/nginx/ssl/nginx_ssl.key -out /etc/nginx/ssl/nginx_ssl.crt 
+            -subj "/C=MA/ST=khouribga/L=khouribga/O=1337/OU=1337/CN=nginx" \
+            -keyout /etc/nginx/ssl/nginx_ssl_key.pem \ 
+            -out /etc/nginx/ssl/nginx_ssl_cert.pem 
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN mkdir -p etc/nginx/html 
+RUN mkdir -p /etc/nginx/html && chmod 777 /etc/nginx/html
 
 COPY tools etc/nginx/html/
 
