@@ -1,6 +1,29 @@
 version: '3'
 services:
-  nginx:
-    build: ./requirements/nginx/Dockerfile
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    build: ./requirements/mariadb/Dockerfile
+    volumes:
+      -db_data:/var/www/html
     ports: 
       - "3000:80"
+    restart: always
+    env_file:
+      - .env
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    volumes:
+      -./wp-data:/var/www/html
+    restart: always
+    depends_on:
+      - mariadb
+    build: ./requirements/wordpress/Dockerfile
+      - "9000:9000"
+      - "8000:80"
+    env_file:
+      - .env
+
+volumes:
+  db_data: {}

@@ -38,6 +38,53 @@ openssl req -x509 -sha256 -days 356 -nodes -newkey rsa:2048 -keyout <where to pu
 **`-out` specify where to put your generated certificate**
 **`-subj "/C=MA/ST=khouribga/L=khouribga/O=1337/OU=1337/CN=nginx` If you want to non-interactively answer the CSR information prompt, you can do so by adding this option to any OpenSSL commands that request CSR information**
 
+# Let's set up Mariadb
+
+## What is mariadb ? 
+
+**MariaDB is a free and open-source relational database management system. It is a fork of the MySQL database and is considered a drop-in replacement for MySQL. MariaDB was created by the original developers of MySQL, after Oracle Corporation acquired MySQL AB and took over development of the MySQL database.**
+
+**MariaDB is designed to be a powerful, scalable and reliable SQL server. It supports a wide range of storage engines, including the InnoDB storage engine that is also used by MySQL. It also includes a number of additional features and improvements over MySQL, such as improved performance, better security, and more flexibility.**
+
+**MariaDB is popular for use in web and application servers, as well as for data warehousing and business intelligence applications. It is widely used by many popular open-source projects and is supported by a large and active community of developers and users**
+
+## How to set up maria db ? 
+
+[check this link !!!!](https://docs.bitnami.com/ibm/apps/silverstripe/configuration/create-database-mariadb/)
+
+```CREATE DATABASE IF NOT EXISTS 'new_database';``` **This statement will create the db new_database if the db does not already exist. If the db already exists, the statement will do nothing.**
+
+```CREATE USER IF NOT EXISTS 'myuser'@'localhost' IDENTIFIED BY 'mypassword';``` **This statement will create the user myuser with the password mypassword if the user does not already exist. If the user already exists, the statement will do nothing.**
+
+```SHOW DATABASES;``` **This statement will show all dbs**
+
+```ALTER USER 'myuser'@'localhost' IDENTIFIED BY 'newpassword';``` **This statement will change the password of an existing user named myuser to newpassword**
+
+```SHOW GRANTS FOR 'myuser'@'localhost';``` **This statement to see the privileges that a user has been granted.**
+
+```GRANT ALL PRIVILEGES ON mydatabase.* TO 'myuser'@'localhost' IF NOT EXISTS;``` **This statement grants ALL privileges on all tables in the mydatabase database to the user myuser if it exists or not.**
+
+```FLUSH PRIVILEGES``` **is used to apply changes**
+
+# Let's set up Mariadb
+
+## how to set up wordpress
+
+**install wp core tool to install word press properly**
+```curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar``` **clone the tool from github**
+```chmod +x wp-cli.phar ``` **add execution rule to it**
+```mv wp-cli.phar /usr/local/bin/wp``` **Move the WP-CLI Phar file to a directory that is in your system's PATH**
+```wp core download --allow-root``` **download the latest version of the WordPress**
+```mv wp-config-sample.php wp-config.php ``` **rename config file**
+```
+sed -i "s/database_name_here/$MYSQL_WP_DBNAME/1" wp-config.php # add your database name
+sed -i "s/username_here/$MYSQL_USERNAME/1" wp-config.php # add your user name
+sed -i "s/password_here/$MYSQL_PASSWORD/1" wp-config.php # add your password
+sed -i "s/localhost/mariadb/1" wp-config.php 
+```
+```wp core install ``` **install wordpresss**
+```wp user create ``` **create new user**
+
 # Some useful resources :
 
 + [What are SSL/TLS Certificates? Why do we Need them? and How do they Work?](https://youtu.be/r1nJT63BFQ0)
