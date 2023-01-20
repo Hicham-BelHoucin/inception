@@ -1,29 +1,61 @@
 version: '3'
 services:
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    build: ./requirements/mariadb/Dockerfile
-    volumes:
-      -db_data:/var/www/html
-    ports: 
-      - "3000:80"
+  nginx:
+    image: nginx
+    container_name: nginx
+    build: ./requirements/nginx/.
+    ports:
+      - "443:443"
     restart: always
+    volumes:
+      - 'wordpress:/var/www/html'
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+      - wordpress
     env_file:
       - .env
   wordpress:
     image: wordpress
     container_name: wordpress
-    volumes:
-      -./wp-data:/var/www/html
-    restart: always
-    depends_on:
-      - mariadb
-    build: ./requirements/wordpress/Dockerfile
+    build: ./requirements/wordpress/.
+    ports: 
       - "9000:9000"
-      - "8000:80"
+    restart: always
+    volumes:
+      - 'wordpress:/var/www/html'
+    networks:
+      - inception
+    env_file:
+      - .env
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    build: ./requirements/mariadb/.
+    networks:
+      - inception
+    volumes:
+      - 'mariadb:/var/lib/mysql'
+    ports: 
+      - "3306:3306"
+    restart: always
     env_file:
       - .env
 
 volumes:
-  db_data: {}
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: /home/hbel-hou/data/wordpress
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: /home/hbel-hou/data/mariadb
+
+networks:
+  inception:
