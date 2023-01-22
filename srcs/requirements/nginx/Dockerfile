@@ -6,7 +6,7 @@
 #    By: hbel-hou <hbel-hou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 13:21:14 by hbel-hou          #+#    #+#              #
-#    Updated: 2023/01/18 13:21:16 by hbel-hou         ###   ########.fr        #
+#    Updated: 2023/01/20 13:49:16 by hbel-hou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,4 +28,3 @@ RUN  apt update -y; \
 COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 CMD ["nginx", "-g", "daemon off;"]
-# CMD ["bash"]

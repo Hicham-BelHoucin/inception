@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   nginx:
     image: nginx
@@ -6,9 +6,9 @@ services:
     build: ./requirements/nginx/.
     ports:
       - "443:443"
-    restart: always
+    restart: on-failure
     volumes:
-      - 'wordpress:/var/www/html'
+      - "wordpress:/var/www/html"
     networks:
       - inception
     depends_on:
@@ -20,11 +20,11 @@ services:
     image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress/.
-    ports: 
+    ports:
       - "9000:9000"
-    restart: always
+    restart: on-failure
     volumes:
-      - 'wordpress:/var/www/html'
+      - "wordpress:/var/www/html"
     networks:
       - inception
     env_file:
@@ -36,26 +36,80 @@ services:
     networks:
       - inception
     volumes:
-      - 'mariadb:/var/lib/mysql'
-    ports: 
+      - "mariadb:/var/lib/mysql"
+    ports:
       - "3306:3306"
-    restart: always
+    restart: on-failure
     env_file:
       - .env
-
+  adminer:
+    image: adminer
+    container_name: adminer
+    build: ./requirements/bonus/adminer/.
+    networks:
+      - inception
+    ports:
+      - "8081:80"
+    restart: on-failure
+  website:
+    image: website
+    container_name: website
+    build: ./requirements/bonus/website/.
+    networks:
+      - inception
+    ports:
+      - "40000:80"
+    restart: on-failure
+  cadvisor:
+    image: cadvisor
+    container_name: cadvisor
+    build: ./requirements/bonus/cadvisor/.
+    networks:
+      - inception
+    ports:
+      - "40001:8080"
+    restart: on-failure
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:rw"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+  redis:
+    image: redis
+    container_name: redis
+    build: ./requirements/bonus/redis/.
+    networks:
+      - inception
+    ports:
+      - "6379:6379"
+    restart: on-failure
+  ftp:
+    image: ftp
+    container_name: ftp
+    build: ./requirements/bonus/ftp/.
+    volumes:
+      - "wordpress:/home/$FTP_USER/ftp_dir"
+    networks:
+      - inception
+    ports:
+      - "21:21"
+    restart: on-failure
+    env_file:
+      - .env
 volumes:
   wordpress:
     driver: local
     driver_opts:
-      type: 'none'
+      type: "none"
       o: bind
       device: /home/hbel-hou/data/wordpress
   mariadb:
     driver: local
     driver_opts:
-      type: 'none'
+      type: "none"
       o: bind
       device: /home/hbel-hou/data/mariadb
 
 networks:
   inception:
+    driver: bridge
