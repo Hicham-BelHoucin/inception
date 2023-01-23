@@ -1,18 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: hbel-hou <hbel-hou@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/18 13:20:45 by hbel-hou          #+#    #+#              #
-#    Updated: 2023/01/18 16:52:08 by hbel-hou         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME=inception
-WEBSITE=$(HOME)/data/wordpress
-DB=$(HOME)/data/mariadb 
+WEBSITE=/home/hbel-hou/data/wordpress
+DB=/home/hbel-hou/data/mariadb 
 COMPOSEFILE=./srcs/docker-compose.yml
 DOCKERCMD=sudo docker compose
 
@@ -24,6 +12,9 @@ $(NAME): volumes
 volumes:
 	@mkdir -p $(WEBSITE)
 	@mkdir -p $(DB)
+
+rebuild:
+	@$(DOCKERCMD) -f $(COMPOSEFILE) up --build --force-recreate --no-deps -d wordpress
 
 ps:
 	@sudo docker ps
@@ -41,4 +32,7 @@ clean:
 	@sudo rm -rf $(WEBSITE)
 	@sudo rm -rf $(DB)
 
-re: down clean all
+fclean: clean
+	@sudo docker system prune -af
+
+re: down fclean all

@@ -7,6 +7,6 @@ RUN  apt-get update -y; \
 
 COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
-COPY ./build/ /var/www/html/react/
+COPY ./src/ /var/www/html/react/
 
 CMD ["nginx", "-g", "daemon off;"]

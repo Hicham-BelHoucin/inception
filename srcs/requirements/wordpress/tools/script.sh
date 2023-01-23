@@ -15,7 +15,7 @@
 
 if [ ! -e '/var/www/html/wp-config.php' ]; then
     mkdir -p '/var/www/html/'
-    chmod 777 '/var/www/html/'
+    chmod -R 777 '/var/www/'
     chown -R www-data:www-data '/var/www/'
     chown -R www-data:www-data '/var/www/html/'
     runuser -u www-data -- wp core download --path='/var/www/html/'

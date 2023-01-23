@@ -1,9 +1,9 @@
 version: "3"
 services:
   nginx:
+    build: ./requirements/nginx/.
     image: nginx
     container_name: nginx
-    build: ./requirements/nginx/.
     ports:
       - "443:443"
     restart: on-failure
@@ -14,12 +14,13 @@ services:
     depends_on:
       - mariadb
       - wordpress
+      - ftp
     env_file:
       - .env
   wordpress:
+    build: ./requirements/wordpress/.
     image: wordpress
     container_name: wordpress
-    build: ./requirements/wordpress/.
     ports:
       - "9000:9000"
     restart: on-failure
@@ -30,9 +31,9 @@ services:
     env_file:
       - .env
   mariadb:
+    build: ./requirements/mariadb/.
     image: mariadb
     container_name: mariadb
-    build: ./requirements/mariadb/.
     networks:
       - inception
     volumes:
@@ -43,31 +44,31 @@ services:
     env_file:
       - .env
   adminer:
+    build: ./requirements/bonus/adminer/.
     image: adminer
     container_name: adminer
-    build: ./requirements/bonus/adminer/.
     networks:
       - inception
     ports:
       - "8081:80"
     restart: on-failure
   website:
+    build: ./requirements/bonus/website/.
     image: website
     container_name: website
-    build: ./requirements/bonus/website/.
     networks:
       - inception
     ports:
-      - "40000:80"
+      - "3000:80"
     restart: on-failure
   cadvisor:
+    build: ./requirements/bonus/cadvisor/.
     image: cadvisor
     container_name: cadvisor
-    build: ./requirements/bonus/cadvisor/.
     networks:
       - inception
     ports:
-      - "40001:8080"
+      - "5000:8080"
     restart: on-failure
     volumes:
       - "/:/rootfs:ro"
@@ -75,27 +76,29 @@ services:
       - "/sys:/sys:ro"
       - "/var/lib/docker/:/var/lib/docker:ro"
   redis:
+    build: ./requirements/bonus/redis/.
     image: redis
     container_name: redis
-    build: ./requirements/bonus/redis/.
     networks:
       - inception
     ports:
       - "6379:6379"
     restart: on-failure
   ftp:
+    build: ./requirements/bonus/ftp/.
     image: ftp
     container_name: ftp
-    build: ./requirements/bonus/ftp/.
     volumes:
-      - "wordpress:/home/$FTP_USER/ftp_dir"
+      - "wordpress:/home/$FTP_USER/ftp/files"
     networks:
       - inception
     ports:
-      - "21:21"
+      - "20-21:20-21"
+      - "40000-40005:40000-40005"
     restart: on-failure
     env_file:
       - .env
+
 volumes:
   wordpress:
     driver: local
