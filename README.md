@@ -2,6 +2,17 @@
 
 This project aims to broaden your knowledge of system administration by using Docker. You will virtualize several Docker images, creating them in your new personal virtual machine.
 
+# Tech Stack Used
+
+- ![NGINX](https://img.shields.io/badge/NGINX-269539?style=for-the-badge&logo=nginx&logoColor=white) with ![TLSv1.2](https://img.shields.io/badge/TLSv1.2-FF4088?style=for-the-badge&logo=ssl&logoColor=white)
+- ![WordPress](https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&logo=wordpress&logoColor=white) + ![php-fpm](https://img.shields.io/badge/php--fpm-777BB4?style=for-the-badge&logo=php&logoColor=white)
+- ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
+- ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+- ![FTP](https://img.shields.io/badge/FTP-0254B5?style=for-the-badge&logo=ftp&logoColor=white)
+- ![Adminer](https://img.shields.io/badge/Adminer-00758F?style=for-the-badge&logo=php&logoColor=white)
+- ![cAdvisor](https://img.shields.io/badge/cAdvisor-4285F4?style=for-the-badge&logo=docker&logoColor=white)
+- Simple static website
+
 # What i Did in that project
 
 - I created A Docker container that contains NGINX with TLSv1.2
